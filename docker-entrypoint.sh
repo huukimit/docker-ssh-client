@@ -9,6 +9,9 @@ if [ ! -f /run/entrypoint.lock ]; then
     test "$SSH_PRIVATE_KEY" && echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
     test "$SSH_KNOWN_HOSTS" && echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
 
+    # Sun*CI SSH compatible
+    test "$PLUGIN_PRIVATEKEY" && echo "$PLUGIN_PRIVATEKEY" | tr -d '\r' | ssh-add - > /dev/null
+
     > /run/entrypoint.lock
 fi
 
